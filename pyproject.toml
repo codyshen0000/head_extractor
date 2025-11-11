@@ -1,0 +1,52 @@
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "head_extractor"
+version = "0.1.0"
+authors = [
+  { name="Shen Sheng", email="codyshens@tju.edu.cn" },
+]
+description = "A package to extract human heads from images using segmentation."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    # 基础依赖
+    "numpy",
+    "Pillow",
+    "opencv-python-headless",
+    "torch",
+    "torchvision",
+    "importlib-resources; python_version < '3.9'",
+
+    # mmengine/mmseg/mmdet 的运行时依赖 (因为它们是源码内植)
+    "addict",
+    "rich",
+    "prettytable",
+    "terminaltables",
+    "tqdm",
+    "matplotlib",
+    "scipy",
+    "ftfy",
+    "regex","pycocotools", "shapely",
+
+    # 当 setup.sh 已经安装好 mmcv 后，这个条件会自动满足。
+    "mmcv == 2.1.0"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"head_extractor" = ["models/*"]
+"mmseg" = ["utils/bpe_simple_vocab_16e6.txt.gz"]
+
